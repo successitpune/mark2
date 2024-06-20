@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Navbar with Full Screen Background Image</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px); /* Optional: adds a blur effect to the navbar */
+      transition: background-color 0.3s ease; /* Smooth transition for background color */
+    }
+
+    .navbar-scrolled {
+      background-color: #333; /* Change to your desired color */
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      
+    }
+
+    .navbar .brand img {
+      height: 60px;
+      width: auto;
+    }
+
+    .navbar .nav-links {
+      list-style-type: none;
+      display: flex;
+      justify-content: center; /* Center align the navbar links */
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar .nav-links li {
+      margin: 0 10px;
+    }
+
+    .navbar .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar .nav-links li a:hover {
+      color: #42a5f5;
+    }
+
+    .navbar .social-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .social-icons a {
+      margin-left: 10px;
+    }
+
+    .navbar .social-icons a img {
+      height: 30px; /* Adjust size as needed */
+      width: auto;
+    }
+
+    .navbar .btn.get-started {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar .btn.get-started:hover {
+      background-color: #ff6347; /* Lighter shade of red on hover */
+    }
+
+        /* Hero section styles */
+        .hero {
+            height: 100vh;
+            background-image: url('n.jpeg'); /* Adjust path */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: #f1096a;
+        }
+       
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+        }
+
+        /* General section styles */
+        .section {
+            padding: 100px 0;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+            opacity: 0; /* Start with opacity 0 for the fade-in effect */
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            flex: 1 1 calc(50% - 20px);
+            max-width: calc(50% - 20px);
+            padding: 20px;
+            transition: transform 0.3s easy-in-out
+
+       }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #ff6347;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* Slow loading effect */
+        body {
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Additional styles for About Us and Services sections */
+        .about-section, .services-section {
+            animation-delay: 0.5s; /* Delay the animation */
+        }
+
+        .about-section {
+            font-size: 1.2rem;
+        }
+
+        .about-section .card {
+            max-width: 100%;
+            flex: 1 1 100%;
+        }
+
+        .services-section {
+            font-size: 1.2rem;
+        }
+
+        .services-section .card {
+            max-width: 100%;
+            flex: 1 1 100%;
+        }
+        /* Contact section styles */
+.contact-section {
+    padding: 100px 0;
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 13rem;
+}
+
+.contact-detail {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    margin-bottom: 20px;
+    padding: 0 15px;
+    text-align: left;
+}
+
+.contact-detail h3 {
+    color: #ff6347;
+    margin-bottom: 10px;
+}
+
+.contact-detail p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .contact-detail {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+/* Footer styles *//* Footer styles */
+
+.footer-bottom .social-icons a {
+    margin-left: 10px;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom .social-icons a:hover {
+    color: #666;
+}
+
+
+        .footer {
+            background-color: #ddc9c9;
+            color: black;
+            padding: 50px 0;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .footer-section {
+            flex: 1 1 33.33%;
+            margin-bottom: 30px;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+
+        .footer-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #666;
+        }
+
+        .footer-section.contact address {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #666;
+            padding-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom .social-icons {
+            margin-top: 10px;
+        }
+
+        .footer-bottom .social-icons a {
+            margin-left: 10px;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom .social-icons a:hover {
+            color: #666;
+        }
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.team-section h2 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.team-members {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    margin: 20px;
+    text-align: center;
+}
+
+.member-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 5px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.member-avatar img {
+    width: 100%;
+    height: auto;
+}
+
+.team-member h4 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.team-member p {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ...............test */
+.testimonial-slider {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .testimonial-card {
+            display: inline-block;
+            width: 300px;
+            margin: 0 10px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            text-align: left;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-content {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            color: #f3c613;
+            font-size: 24px;
+        }
+
+        .testimonial-author {
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .star {
+            font-size: 20px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="brand">
+                    <img  src="success.png" alt="Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#languages">Languages</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+           
+                <a href="#" class="btn get-started">Get Started</a>
+            </div>
+        </nav>
+    </header>
+ 
+    
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SUCCESS INSTITUTE. </h1>
+            <h2>Welcome to our website.</h2>
+        </div>
+    </section>
+
+    <section id="about" class="section about-section">
+        <div class="container">
+    
+        
+            <h2 style="margin-left: 30rem; margin-top: 4rem;">About Us</h2>
+            <br><br>
+            <br>
+
+            <p><br><br>At my Institute, we believe that languages are the key to unlocking global opportunities. 
+                As Indian companies emerge as major players on the international stage, the demand for individuals
+                 proficient in foreign languages has never been higher. Our mission is to bridge the language gap, facilitating smooth and effective communication for successful business interactions.<br></p>
+        
+            <div class="container">   
+                <div class="card">
+                    <h3>Our Mission</h3>
+                    <p>In today's globalized world, clear communication is key for Indian businesses going international. Breaking language barriers is crucial for competing with big multinational companies. That's why we're focused on giving people the language skills they need to succeed in the global business world. Our aim isn't just to teach language skills, but also to spark a lifelong interest in different languages and cultures.</p>
+                </div>
+        
+                <div class="card">
+                    <h3>Future Outlook</h3>
+                    <p>The future of language learning is exceptionally promising, with new opportunities emerging daily. From a career perspective, proficiency in multiple languages is a valuable asset. Our language courses not only focus on fluency but also encompass communication skills, grammatical structures, and comprehensive language comprehension—enabling individuals to read, write, speak, and listen effectively.</p>
+                </div>
+        
+                <div class="card">
+                    <h3>Why Us?</h3>
+                    <p>Our commitment lies in equipping individuals with the linguistic expertise required to excel in various fields. Whether pursuing a career in entertainment, tourism, public relations, international organizations, or publishing, our language courses open doors to diverse professional avenues.</p>
+                </div>
+        
+                <div class="card">
+                    <h3>Our Expertise</h3>
+                    <p>Fluency in language is vital for organizations engaged in international communication. Enhanced communication skills contribute to more effective teamwork, enabling employees to reach their full potential. Bhasha Academy provides tailored lessons and courses for corporate training, catering to both individuals and entire workforces.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="services" class="section services-section">
+        <br>
+        <br>
+        <br>
+
+      
+            <h2 style="margin-left: 5rem;" >Our Services</h2>
+          
+            <div class="grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px;">
+
+                <!-- Language Courses -->
+                <div class="cards" style=background-color:white; box-shadow: 0px 3px 6px rgba(24, 24, 27, 0.1), 0px 8px 15px rgba(24, 24, 27, 0.2); padding: 24px; border-radius: 15px; cursor: pointer; position: relative; transition: box-shadow .25s; overflow: hidden;">
+                    <span class="icon" style="display: flex; justify-content: center; align-items: center; background-color: rgba(24, 24, 27, 0.04); border: 1px solid rgba(24, 24, 27, 0.1); width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; fill: #52525B; transition: fill .25s;">
+                            <path d="M14.5 3.5C14.5 3.5 14.5 5.5 12 5.5C9.5 5.5 9.5 3.5 9.5 3.5H7.5L4.20711 6.79289C3.81658 7.18342 3.81658 7.81658 4.20711 8.20711L6.5 10.5V20.5H17.5V10.5L19.7929 8.20711C20.1834 7.81658 20.1834 7.18342 19.7929 6.79289L16.5 3.5H14.5Z"></path>
+                        </svg>
+                    </span>
+                    <h4 class="h4" style="margin: 0; font-weight: 600; font-size: 16px; line-height: 1.5; color: #52525B; margin-bottom: 8px;">Language Courses</h4>
+                    <p class="p" style="margin: 0; font-size: 14px; line-height: 1.7; color: #52525B;">Structured courses designed to teach various levels of proficiency in the target language, covering grammar, vocabulary, speaking, listening, reading, and writing skills.</p>
+                </div>
+        
+                <!-- Conversation Practice Sessions -->
+                <div class="cards" style="background-color: white; box-shadow: 0px 3px 6px rgba(24, 24, 27, 0.1), 0px 8px 15px rgba(24, 24, 27, 0.2); padding: 24px; border-radius: 15px; cursor: pointer; position: relative; transition: box-shadow .25s; overflow: hidden;">
+                    <span class="icon" style="display: flex; justify-content: center; align-items: center; background-color: rgba(24, 24, 27, 0.04); border: 1px solid rgba(24, 24, 27, 0.1); width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; fill: #52525B; transition: fill .25s;">
+                            <path d="M4.5 9.5V5.5C4.5 4.94772 4.94772 4.5 5.5 4.5H9.5C10.0523 4.5 10.5 4.94772 10.5 5.5V9.5C10.5 10.0523 10.0523 10.5 9.5 10.5H5.5C4.94772 10.5 4.5 10.0523 4.5 9.5Z"></path>
+                            <path d="M13.5 18.5V14.5C13.5 13.9477 13.9477 13.5 14.5 13.5H18.5C19.0523 13.5 19.5 13.9477 19.5 14.5V18.5C19.5 19.0523 19.0523 19.5 18.5 19.5H14.5C13.9477 19.5 13.5 19.0523 13.5 18.5Z"></path>
+                            <path d="M4.5 19.5L7.5 13.5L10.5 19.5H4.5Z"></path>
+                            <path d="M16.5 4.5C18.1569 4.5 19.5 5.84315 19.5 7.5C19.5 9.15685 18.1569 10.5 16.5 10.5C14.8431 10.5 13.5 9.15685 13.5 7.5C13.5 5.84315 14.8431 4.5 16.5 4.5Z"></path>
+                        </svg>
+                    </span>
+                    <h4 class="h4" style="margin: 0; font-weight: 600; font-size: 16px; line-height: 1.5; color: #52525B; margin-bottom: 8px;">Conversation Practice Sessions</h4>
+                    <p class="p" style="margin: 0; font-size: 14px; line-height: 1.7; color: #52525B;">Regular sessions where students can practice speaking the target language in a supportive environment, focusing on fluency, pronunciation, and natural conversation.</p>
+                </div>
+        
+                <!-- Professional Development Workshops -->
+                <div class="cards" style="background-color: white;box-shadow: 0px 3px 6px rgba(24, 24, 27, 0.1), 0px 8px 15px rgba(24, 24, 27, 0.2); padding: 24px; border-radius: 15px; cursor: pointer; position: relative; transition: box-shadow .25s; overflow: hidden;">
+                    <span class="icon" style="display: flex; justify-content: center; align-items: center; background-color: rgba(24, 24, 27, 0.04); border: 1px solid rgba(24, 24, 27, 0.1); width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; fill: #52525B; transition: fill .25s;">
+                            <path d="M5.5 19.5V15.5C5.5 14.9477 5.94772 14.5 6.5 14.5H10.5C11.0523 14.5 11.5 14.9477 11.5 15.5V19.5C11.5 20.0523 11.0523 20.5 10.5 20.5H6.5C5.94772 20.5 5.5 20.0523 5.5 19.5Z"></path>
+                            <path d="M13.5 19.5V10.5C13.5 9.94772 13.9477 9.5 14.5 9.5H18.5C19.05233 19.5 19.5 13.5 19.5Z"></path>
+                            <path d="M3.5 11.5L7.5 7.5L11.5 11.5H3.5Z"></path>
+                        </svg>
+                    </span>
+                    <h4 class="h4" style="margin: 0; font-weight: 600; font-size: 16px; line-height: 1.5; color: #52525B; margin-bottom: 8px;">Professional Development Workshops</h4>
+                    <p class="p" style="margin: 0; font-size: 14px; line-height: 1.7; color: #52525B;">Workshops for language teachers to enhance their teaching skills, learn new methodologies, and stay updated on the latest trends in language education.</p>
+                </div>
+        
+                <!-- Translation Services -->
+                <div class="cards" style="background-color: white;box-shadow: 0px 3px 6px rgba(24, 24, 27, 0.1), 0px 8px 15px rgba(24, 24, 27, 0.2); padding: 24px; border-radius: 15px; cursor: pointer; position: relative; transition: box-shadow .25s; overflow: hidden;">
+                    <span class="icon" style="display: flex; justify-content: center; align-items: center; background-color: rgba(24, 24, 27, 0.04); border: 1px solid rgba(24, 24, 27, 0.1); width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; fill: #52525B; transition: fill .25s;">
+                            <path d="M7.5 6.5L12 3L16.5 6.5V17C16.5 17.5 16.3 17.9 16 18.2C15.6 18.6 15.1 18.8 14.5 18.8H9.5C8.9 18.8 8.4 18.6 8 18.2C7.6 17.9 7.5 17.5 7.5 17V6.5Z"></path>
+                            <path d="M12 3V18.8"></path>
+                        </svg>
+                    </span>
+                    <h4 class="h4" style="margin: 0; font-weight: 600; font-size: 16px; line-height: 1.5; color: #52525B; margin-bottom: 8px;">Translation Services</h4>
+                    <p class="p" style="margin: 0; font-size: 14px; line-height: 1.7; color: #52525B;">Accurate and reliable translation services catering to various sectors, ensuring clear and culturally appropriate communication in the target language.</p>
+                </div>
+        
+                <!-- Proofreading Services -->
+                <div class="cards" style="background-color: white;box-shadow: 0px 3px 6px rgba(24, 24, 27, 0.1), 0px 8px 15px rgba(24, 24, 27, 0.2); padding: 24px; border-radius: 15px; cursor: pointer; position: relative; transition: box-shadow .25s; overflow: hidden;">
+                    <span class="icon" style="display: flex; justify-content: center; align-items: center; background-color: rgba(24, 24, 27, 0.04); border: 1px solid rgba(24, 24, 27, 0.1); width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; fill: #52525B; transition: fill .25s;">
+                            <path d="M12 6.5V10.5M12 13.5H12.01M7.5 7.5L4.20711 10.7929C3.81658 11.1834 3.81658 11.8166 4.20711 12.2071L7.5 15.5M16.5 7.5L19.7929 10.7929C20.1834 11.1834 20.1834 11.8166 19.7929 12.2071L16.5 15.5M12 18.5V22.5M12 2.5V6.5"></path>
+                        </svg>
+                    </span>
+                    <h4 class="h4" style="margin: 0; font-weight: 600; font-size: 16px; line-height: 1.5; color: #52525B; margin-bottom: 8px;">Proofreading Services</h4>
+                    <p class="p" style="margin: 0; font-size: 14px; line-height: 1.7; color: #52525B;">Thorough proofreading services for documents in the target language, ensuring grammatical accuracy, correct spelling, and proper formatting.</p>
+                </div>
+        
+                <!-- Language Consultation -->
+                <div class="cards" id="consultation-card" style="background-color: white; box-shadow: 0px 3px 6px rgba(24, 24, 27, 0.1), 0px 8px 15px rgba(24, 24, 27, 0.2); padding: 24px; border-radius: 15px; cursor: pointer; position: relative; transition: box-shadow .25s; overflow: hidden;">
+                    <span class="icon" style="display: flex; justify-content: center; align-items: center; background-color: rgba(24, 24, 27, 0.04); border: 1px solid rgba(24, 24, 27, 0.1); width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px; text-align: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; fill: #52525B; transition: fill .25s;">
+                            <path d="M3 13.5L8 13.5L8 18.5M21 10.5L16 10.5L16 5.5M8 13.5L16 5.5" stroke-width="1.5"></path>
+                            <path d="M14 13.5V21H21V13.5H14Z" stroke-width="1.5"></path>
+                            <path d="M10 10.5V18H3V10.5H10Z" stroke-width="1.5"></path>
+                        </svg>
+                    </span>
+                    <h4 class="h4" style="margin: 0; font-weight: 600; font-size: 16px; line-height: 1.5; color: #52525B; margin-bottom: 8px;">Language Consultation</h4>
+                    <p class="p" style="margin: 0; font-size: 14px; line-height: 1.7; color: #52525B;">Personalized consultation sessions with language experts to assess language learning needs, provide guidance, and create effective learning plans.</p>
+                </div>
+                
+               
+        
+            </div>
+           
+            </section>
+            <br>
+            <br>
+            <br>
+                            <section   id="team" class="section team-section">
+                <div class="container"><br><br>
+               
+                    <h2  style="margin-top: 2rem;">Our Team</h2>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="team-members" id="team-members">
+                        <div class="team-member">
+                            <div class="member-avatar">
+                                <img src="gaurav.png" alt="Team Member 1">                            </div>
+                            <h4>Gaurav Nandedkar</h4>
+                            <p>Chief Executive Officer</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">
+                                <img src="c.jpeg" alt="Team Member 2">
+                            </div>
+                            <h4>sneha patil</h4>
+                            <p>Chief Financial Officer</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">
+                                <img src="gaurav.png" alt="Team Member 3">
+                            </div>
+                            <h4>pooja thakre</h4>
+                            <p>Chief Operating Officer</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">
+                                <img src="b.jpeg" alt="Team Member 4">
+                            </div>
+                            <h4>Anaya valunj</h4>
+                            <p>Chief Marketing Officer</p>
+                        </div>
+                      
+                    </div>
+                </div>
+            </section>
+            <br>
+            <br>
+            <br>
+
+            <h3 style="margin-left: 38rem ;">Testimonial</h3>
+            <br>
+            <br>
+
+            <div class="testimonial-slider">
+                <div class="testimonial-card" id="card1" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                  <div class="testimonial-content">
+                    <p>"Great service! Highly recommended!"</p>
+                    <div class="rating">
+                      <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                    </div>
+                  </div>
+                  <div class="testimonial-author">
+                    <p>om raut</p>
+                  </div>
+                </div>
+                
+                <div class="testimonial-card" id="card2" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                  <div class="testimonial-content">
+                    <p>"Excellent product quality !"
+                       
+                    </p>
+                    <div class="rating">
+                      <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                    </div>
+                  </div>
+                  <div class="testimonial-author">
+                    <p>madhri ujadhav</p>
+                  </div>
+                </div>
+                
+                <div class="testimonial-card" id="card3" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                  <div class="testimonial-content">
+                    <p>"Best customer support ever!"</p>
+                    <div class="rating">
+                      <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                    </div>
+                  </div>
+                  <div class="testimonial-author">
+                    <p>Michael Johnson</p>
+                  </div>
+                </div>
+                
+                <div class="testimonial-card" id="card4" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                  <div class="testimonial-content">
+                    <p>"Amazing experience. "</p>
+                    <div class="rating">
+                      <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                    </div>
+                  </div>
+                  <div class="testimonial-author">
+                    <p>Emily Brown</p>
+                  </div>
+                </div>
+                
+                
+            </div>
+              
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+            <section id="contact" class="section contact-section">
+                <div class="container">
+                
+                 
+                    <h2  style="margin-left: 32rem; margin-top: 5rem;">Contact Us</h2>
+                
+                
+                <br>
+                <br>
+                        <div  style="margin-top: 2rem;" class="contact-info">
+                            <div class="contact-detail">
+                                <br>
+                                <h3>Address</h3>
+                                <p> B-3, 1st floor, sant tukaram vyapar sankul,nigdi pune 411044 </p>
+                            </div>
+                            <div class="contact-detail">
+                                <br>
+                                <h3>Call Us</h3>
+                                <p>+91 724 970 81 46</p>
+                                <p>+91 904 904 23 45</p>
+                              
+                            </div>
+                            <div class="contact-detail">
+                                <h3>Email Us</h3>
+                                
+                                <p><a href="m">admin@infyvaritaas.com</a></p>
+                                <p><a href="mailto:preeti@bhasha.academy">success123@academy</a></p>
+                                <p><a href="mailto:deepak@bhasha.academy">deepa123@.institute</a></p>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="contact-detail">
+                                <h3>Open Hours</h3>
+                                <p>Monday - Saturday</p>
+                                <p><b>9:00AM - 06:00PM</b></p>
+                            </div>
+                        </div>
+                    </center>
+                
+                </div>
+            </section>
+            <section>
+                
+
+           
+                <center>
+                    <h2 style="margin-left: 1rem;">Our Offices Locations</h2>
+                    <br>
+                    <br>
+                    <br>
+
+                    <br>
+
+                    <br>
+
+                    <div style="width: 800px; height: 500px;" class = "map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d483856.5444124593!2d73.777259!3d18.658195!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b9e0ffffffff%3A0xfecf069d2e2d9ecd!2sSuccess%20Institute%20Of%20Technology!5e0!3m2!1sen!2sus!4v1713092741344!5m2!1sen!2sus"  width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                      </div>
+                </center>
+             
+            </section>
+          
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section links">
+                            <h2>Useful Links</h2>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#about">About Us</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#terms">Terms of Service</a></li>
+                                <li><a href="#privacy">Privacy Policy</a></li>
+                                <li><a href="#contact">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section services"><br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                                <h2>Our Services</h2>
+                            <ul>
+                                <li><a href="#language-courses"> languages Learning</a></li>
+                                <li><a href="#easy-learning">Easy to Learn</a></li>
+                                <li><a href="#qualified-teachers">Highly Qualified Teachers</a></li>
+                                <li><a href="#continuous-learning">Continuous Learning and Development</a></li>
+                                <li><a href="#quality-assurance">Maintain Quality Assurance of Teaching</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-section contact">
+                            <h2>Contact Us</h2>
+                            <address>
+                                B-3, 1st floor, sant tukaram vyapar sankulnigdi pune 411044 <br><br>
+                                Phone:<br>
+                                <a href="tel:+919307172235">+904 904 23 45</a><br>
+                                <a href="tel:+918459437075">+91 84 59 43 70 75</a><br>
+                                <a href="tel:+919112211449">+91 9 11 22 11 44 9</a><br><br>
+                                Email:<br>
+                                <a href="mailto:info@bhasha.academy">info@success.academy</a><br>
+                                <a href="mailto:preeti@bhasha.academy">success@.academy</a><br>
+                                <a href="mailto:deepak@bhasha.academy">success12@.institute</a>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <p>&copy; Copyright success institute of technology 2024/p>
+                    </div>
+                </div>
+            </footer>
+            
+            
+            <!-- Additional sections can be added as needed -->
+            
+            <script>
+                
+                  var currentHour = new Date().getHours();
+
+
+                // JavaScript to add 'loaded' class to body after window is loaded
+                window.addEventListener('load', function () {
+                    document.body.classList.add('loaded');
+                });
+                document.addEventListener("DOMContentLoaded", function() {
+      const navbar = document.querySelector(".navbar");
+      let lastScrollTop = 0;
+      const scrollOffset = 400;
+
+      window.addEventListener("scroll", function() {
+        let scrollTop = window.scrollY;
+
+        if (scrollTop > scrollOffset && scrollTop > lastScrollTop) {
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.remove("navbar-scrolled");
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    });
+
+   </script>
+            
+            </body>
